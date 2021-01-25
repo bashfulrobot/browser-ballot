@@ -1,0 +1,20 @@
+- name: set microsoft edge dev browser apt gpg key
+  become: yes
+  apt_key:
+    url: "https://packages.microsoft.com/keys/microsoft.asc"
+    state: present
+
+- name: add edge dev repository
+  become: yes
+  template:
+      src: microsoft-edge-dev.list.j2
+      dest: /etc/apt/sources.list.d/microsoft-edge-dev.list
+      group: root
+      owner: root
+      mode: '0644'
+
+- name: install microsoft edge dev
+  become: yes
+  apt:
+    name: microsoft-edge-dev
+    update_cache: true

@@ -1,0 +1,31 @@
+---
+
+# - name: add google chrome key
+#   become: yes
+#   shell: wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+# # FIX ABOVE
+
+- name: google chrome gpg key
+  become: yes
+  apt_key:
+    url: "https://dl-ssl.google.com/linux/linux_signing_key.pub"
+    state: present
+
+- name: add google chrome repo
+  become: yes
+  copy:
+    content: "deb http://dl.google.com/linux/chrome/deb/ stable main"
+    dest: /etc/apt/sources.list.d/google-chrome.list
+    owner: root
+    group: root
+    mode: 644
+
+- name: update apt cache
+  become: yes
+  apt:
+    update_cache: yes
+
+- name: install google chrome
+  become: yes
+  apt:
+    name: google-chrome-stable

@@ -1,0 +1,27 @@
+---
+# defaults file for browser_ballot
+
+# Supported Options
+# The browser value must match the package name.
+#   Browser             Value
+# ========================================
+# - Google Chrome       : google-chrome-stable
+# - Firefox             : firefox
+# - Microsoft Edge      : microsoft-edge-dev
+# - Brave               : brave-browser
+# - Brave Nightly       : brave-browser-nightly
+
+# Browser to install
+install_browser: firefox
+
+# Supported browsers
+browsers:
+    - google-chrome-stable
+    - firefox
+    - microsoft-edge-dev
+    - brave-browser
+    - brave-browser-nightly
+
+# Uninstall other supported browers?
+# This will skip over the browser specified in "install_browser"
+uninstall_other_browers: false

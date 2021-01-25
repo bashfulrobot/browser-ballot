@@ -1,0 +1,11 @@
+- hosts: localhost
+  pre_tasks:
+    - name: Update Repositories
+      become: yes
+      apt: update_cache=yes
+      changed_when: false
+  roles:
+    - ./roles/browser_ballot
+  vars:
+    install_browser: "google-chrome-stable"
+    uninstall_other_browers: false

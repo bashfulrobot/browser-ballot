@@ -1,0 +1,20 @@
+- name: set brave release apt gpg key
+  become: yes
+  apt_key:
+    url: "https://brave-browser-apt-release.s3.brave.com/brave-core.asc"
+    state: present
+
+- name: add brave release repository
+  become: yes
+  template:
+      src: brave-browser-release.list.j2
+      dest: /etc/apt/sources.list.d/brave-browser-release.list
+      group: root
+      owner: root
+      mode: '0644'
+
+- name: install brave
+  become: yes
+  apt:
+    name: brave-browser
+    update_cache: true

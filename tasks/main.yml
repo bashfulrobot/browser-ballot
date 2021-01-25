@@ -1,0 +1,30 @@
+---
+# tasks file for browser_ballot
+
+# Browsers to uninstall
+- name: uninstall other supported browsers
+  become: yes
+  apt:
+    name: "{{item}}"
+    state: absent
+  loop: "{{browsers}}"
+  when:
+    - uninstall_other_browers is defined
+    - browsers is defined
+    - uninstall_other_browers
+    - item != install_browser
+
+- name: import microsoft edge dev specific tasks
+  include_tasks: "edge.yml"
+  when:
+    - install_browser == "microsoft-edge-dev"
+
+- name: import brave specific tasks
+  include_tasks: "brave_release.yml"
+  when:
+    - install_browser == "brave-browser"
+
+- name: import brave nightly specific tasks
+  include_tasks: "brave_nightly.yml"
+  when:
+    - install_browser == "brave-browser-nightly"
